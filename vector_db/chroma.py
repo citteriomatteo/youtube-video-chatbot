@@ -28,14 +28,14 @@ class EnhVectorDatabase:
                 embeddings=embeddings,
                 documents=documents,
                 metadatas=[{"source": "test"} for _ in range(len(documents))],
-                ids=[str(i) for i in range(len(documents))]
+                ids=[str(collection.count() + i) for i in range(len(documents))]
             )
 
         else:  # using default chroma encoding
             collection.add(
                 documents=documents,
                 metadatas=[{"source": "test"} for _ in range(len(documents))],
-                ids=[str(i) for i in range(len(documents))]
+                ids=[str(collection.count() + i) for i in range(len(documents))]
             )
 
     def get_most_similar_documents(self, collection_name: str, query_text: str, n=1, use_default_encoding=True):
