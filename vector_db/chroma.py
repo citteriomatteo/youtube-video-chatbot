@@ -46,10 +46,10 @@ class EnhVectorDatabase:
             return collection.query(
                 query_texts=[query_text],
                 n_results=n
-            )
+            )["documents"][0]
 
         query_embedding = self.custom_encoder.encode([query_text])[0].tolist()
         return collection.query(
             query_embeddings=[query_embedding],
             n_results=n
-        )
+        )["documents"][0]
