@@ -1,7 +1,7 @@
 import chromadb
 from sentence_transformers import SentenceTransformer
 
-from config import DEF_COLLECTION_NAME, N_MOST_RELEVANT_CHUNKS
+from config import DEF_COLLECTION_NAME, USE_DEF_ENCODING, N_MOST_RELEVANT_CHUNKS
 
 
 class EnhVectorDatabase:
@@ -35,7 +35,7 @@ class EnhVectorDatabase:
             {collection_name: self.chroma_client.create_collection(name=collection_name)}
         )
 
-    def insert_new_chunks(self, documents: [], use_default_encoding: bool = True, collection_name: str = None):
+    def insert_new_chunks(self, documents: [], use_default_encoding: bool = USE_DEF_ENCODING, collection_name: str = None):
         """
         Inserts, in the requested collection, the given documents using default or custom encoding.
         :param documents: list of texts
@@ -63,7 +63,7 @@ class EnhVectorDatabase:
                 ids=[str(collection.count() + i) for i in range(len(documents))]
             )
 
-    def get_most_similar_documents(self, query_text: str, n=N_MOST_RELEVANT_CHUNKS, use_default_encoding=True, collection_name: str = DEF_COLLECTION_NAME):
+    def get_most_similar_documents(self, query_text: str, n=N_MOST_RELEVANT_CHUNKS, use_default_encoding: bool = USE_DEF_ENCODING, collection_name: str = DEF_COLLECTION_NAME):
         """
         Returns the "n" most similar text chunks related to textual query.
         :param query_text: textual query

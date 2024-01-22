@@ -20,8 +20,7 @@ def make_a_question(question: str, vector_db: EnhVectorDatabase, n_relevant_docu
 
     most_similar_chunks = vector_db.get_most_similar_documents(
         query_text=question,
-        n=n_relevant_documents,
-        use_default_encoding=True
+        n=n_relevant_documents
     )
     prompt_content = "\n".join(most_similar_chunks)
 

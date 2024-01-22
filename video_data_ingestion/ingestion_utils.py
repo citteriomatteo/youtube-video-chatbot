@@ -12,14 +12,14 @@ def load_transcript_into_vector_storage(vector_db: EnhVectorDatabase, filename: 
         with open(filename, 'r', encoding='utf-8') as file:
             transcript = file.read()
     chunks = get_transcript_chunks(transcript=transcript)
-    vector_db.insert_new_chunks(documents=chunks, use_default_encoding=True)
+    vector_db.insert_new_chunks(documents=chunks)
 
 
 def get_transcript_chunks(transcript):
     """
     Uses spaCy library to chunkize the whole transcript.
     """
-    nlp = spacy.load('it_core_news_sm')
+    nlp = spacy.load('en_core_web_sm')
     doc = nlp(transcript)
     chunks = [sent.text for sent in doc.sents]
     return chunks
