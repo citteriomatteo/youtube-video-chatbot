@@ -12,7 +12,7 @@ def load_transcript_into_vector_storage(vector_db: EnhVectorDatabase, filename: 
         with open(filename, 'r', encoding='utf-8') as file:
             transcript = file.read()
     chunks = get_transcript_chunks(transcript=transcript)
-    vector_db.insert_new_chunks(collection_name="embeddings", documents=chunks, use_default_encoding=True)
+    vector_db.insert_new_chunks(documents=chunks, use_default_encoding=True)
 
 
 def get_transcript_chunks(transcript):

@@ -49,8 +49,11 @@ def download_transcript(video_id, filename):
                 for entry in transcript:
                     file.write(entry['text'] + '\n')
             print(f'Transcript of the video {video_id} saved successfully.')
+            return True
         else:
             print(f'No transcript for the video {video_id}.')
+            return False
 
     except Exception as e:
         print(f'Error during transcript download of video {video_id}: {e}')
+        return False

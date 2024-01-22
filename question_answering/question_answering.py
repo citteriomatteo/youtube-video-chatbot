@@ -3,14 +3,22 @@ from vector_db.chroma import EnhVectorDatabase
 from dotenv import load_dotenv
 import os
 
-# Carica le variabili di ambiente dal file .env
+from config import N_MOST_RELEVANT_CHUNKS
+
+# load .env data for secrets
 load_dotenv()
 
 
-def make_a_question(question: str, vector_db: EnhVectorDatabase, n_relevant_documents=1):
+def make_a_question(question: str, vector_db: EnhVectorDatabase, n_relevant_documents=N_MOST_RELEVANT_CHUNKS):
+    """
+    Returns the answer to the given question using gpt 3.5 turbo with prompt enhancement.
+    :param question: textual question
+    :param vector_db: vector storage instance
+    :param n_relevant_documents: number of most relevant chunks to use for prompt augmentation
+    :return: textual response
+    """
 
     most_similar_chunks = vector_db.get_most_similar_documents(
-        collection_name="embeddings",
         query_text=question,
         n=n_relevant_documents,
         use_default_encoding=True

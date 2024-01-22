@@ -34,7 +34,6 @@ def get_pdf_transcript_from_url(url: str):
         page = pdf_document[page_number]
         text += page.get_text()
 
-    # Chiudi il documento PDF
     pdf_document.close()
 
     return text
